@@ -9,7 +9,6 @@ type State = "idle" | "loading" | "success" | "exhausted" | "limit" | "error";
 
 export function GenerateButton() {
   const [state, setState] = useState<State>("idle");
-  const [docNumber, setDocNumber] = useState(0);
   const [docUrl, setDocUrl] = useState("");
 
   async function handleClick() {
@@ -19,7 +18,6 @@ export function GenerateButton() {
       const data = await res.json();
 
       if (res.ok && data.success) {
-        setDocNumber(data.totalDownloads);
         setDocUrl(data.url);
         setState("success");
 
@@ -44,7 +42,7 @@ export function GenerateButton() {
   }
 
   if (state === "success") {
-    return <InstructionsPanel docNumber={docNumber} url={docUrl} />;
+    return <InstructionsPanel url={docUrl} />;
   }
   if (state === "exhausted") return <ExhaustedPanel />;
   if (state === "limit") return <LimitPanel />;

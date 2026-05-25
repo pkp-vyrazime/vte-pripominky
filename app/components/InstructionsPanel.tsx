@@ -1,11 +1,10 @@
 "use client";
 
 interface Props {
-  docNumber: number;
   url: string;
 }
 
-export function InstructionsPanel({ docNumber, url }: Props) {
+export function InstructionsPanel({ url }: Props) {
   function handleShare() {
     if (navigator.share) {
       navigator.share({
@@ -29,7 +28,7 @@ export function InstructionsPanel({ docNumber, url }: Props) {
   return (
     <div className="bg-teal-50 border border-teal-200 rounded-2xl p-5 text-left space-y-3 text-sm">
       <p className="font-bold text-teal-800 text-base">
-        ✓ Stáhli jste si připomínku č.&nbsp;{docNumber}
+        ✓ Stáhli jste si dokument s připomínkami
       </p>
 
       <div className="space-y-2 text-gray-700">
@@ -58,7 +57,7 @@ export function InstructionsPanel({ docNumber, url }: Props) {
           </li>
         </ol>
         <p className="font-semibold text-teal-800">
-          Termín: do 1.&nbsp;6.&nbsp;2026
+          Termín: je potřeba poslat nejdéle do 1.&nbsp;6.&nbsp;2026!
         </p>
       </div>
 
