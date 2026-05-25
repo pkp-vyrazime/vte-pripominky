@@ -41,11 +41,20 @@ export async function POST() {
     );
   }
 
-  const result = (await redis.eval(
-    INCR_SCRIPT,
-    [REDIS_COUNTER_KEY],
-    [CAPACITY, COUNTER_OFFSET],
-  )) as number;
+  let result: number;
+  try {
+    result = (await redis.eval(
+      INCR_SCRIPT,
+      [REDIS_COUNTER_KEY],
+      [CAPACITY, COUNTER_OFFSET],
+    )) as number;
+  } catch (e) {
+    console.error("generate error:", e);
+    return NextResponse.json(
+      { success: false, code: "SERVER_ERROR", message: "Něco se pokazilo. Zkuste to za chvíli znovu." },
+      { status: 500 },
+    );
+  }
 
   if (result === -1) {
     return NextResponse.json(
