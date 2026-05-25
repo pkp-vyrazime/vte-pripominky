@@ -65,6 +65,10 @@ export function GenerateButton() {
 
   return (
     <div className="text-center space-y-3">
+      <p className="text-sm text-gray-600">
+        Vygeneruje Vám dokument s připomínkami. Vy jen doplníte jméno,
+        podepíšete a odešlete na ministerstvo.
+      </p>
       <button
         onClick={handleClick}
         disabled={state === "loading"}
@@ -94,12 +98,13 @@ export function GenerateButton() {
             Generuji…
           </span>
         ) : (
-          "Vygenerovat moji připomínku"
+          "Vygenerovat dokument s připomínkami"
         )}
       </button>
       <p className="text-sm text-gray-500">
-        Vyberte si jednu z připravených připomínek. Doplníte jméno, podepíšete
-        a odešlete na ministerstvo. Trvá to 5&nbsp;minut.
+        Připomínky se týkají akceleračních zón AOV&nbsp;51 Řenče,
+        AOV&nbsp;62 Střížovice a AOV&nbsp;63 Únětice. Určeno pro občany
+        s&nbsp;trvalým pobytem v&nbsp;zasaženém okolí.
       </p>
     </div>
   );

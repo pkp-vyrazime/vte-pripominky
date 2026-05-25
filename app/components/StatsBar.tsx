@@ -10,7 +10,6 @@ function pluralize(n: number): string {
 
 export function StatsBar() {
   const [total, setTotal] = useState<number | null>(null);
-  const [capacity, setCapacity] = useState(51);
 
   useEffect(() => {
     async function fetchStats() {
@@ -18,7 +17,6 @@ export function StatsBar() {
         const res = await fetch("/api/stats");
         const data = await res.json();
         setTotal(data.total);
-        setCapacity(data.capacity);
       } catch {
         /* ignore */
       }
@@ -40,22 +38,11 @@ export function StatsBar() {
 
   if (total === null) return null;
 
-  const pct = Math.min(100, Math.round((total / capacity) * 100));
-
   return (
-    <div className="text-center space-y-2">
+    <div className="text-center">
       <p className="text-sm text-gray-600">
         <strong className="text-gray-900">{total}</strong>{" "}
         {pluralize(total)} připomínku
-      </p>
-      <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
-        <div
-          className="bg-teal-600 h-full rounded-full transition-all duration-500"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-      <p className="text-xs text-gray-400">
-        {total} / {capacity}
       </p>
     </div>
   );
